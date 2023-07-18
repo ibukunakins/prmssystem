@@ -28,7 +28,7 @@ class RolesTableSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Patient',
                 'description' => 'EMR Client'
-            ]
+            ],
         ];
         Role::insert($roles);
     }

@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Patient;
-use App\Models\Staff;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Staff;
+use App\Models\Patient;
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class StaffTableSeeder extends Seeder
 {

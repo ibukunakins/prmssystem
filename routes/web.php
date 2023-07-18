@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PatientController;
-use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\StaffController;
-use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,20 +24,22 @@ use App\Http\Controllers\SettingController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(Auth::check()) {
+        return redirect('dashboard');
+    } else {
+        return redirect('login');
+        
+    }
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::middleware(['staff', 'auth', 'verified'])->prefix('dashboard')->group(function(){
+    Route::middleware(['staff', 'verified'])->prefix('account')->group(function(){
 
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
         Route::group(['prefix' => 'clients', 'as' => 'clients'], function(){
             Route::get('/', [PatientController::class, 'index'])->name('index');
             Route::get('/create', [PatientController::class, 'create'])->name('create');
@@ -65,8 +69,8 @@ Route::middleware('auth')->group(function () {
 
     });
 
-    Route::middleware(['auth', 'verified', 'admin'])->prefix('dashboard')->group(function (){
-
+    Route::middleware(['verified', 'admin'])->prefix('dashboard')->group(function (){
+        
         Route::group(['prefix' => 'staff', 'as' => 'staff'], function (){
             Route::get('/', [StaffController::class, 'index'])->name('index');
             Route::get('/create', [StaffController::class, 'create'])->name('create');
