@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-        <title>Nasarawa Revenue Dashboard</title>
+        <title>ERM</title>
 
         <meta name="description" content="" />
 
@@ -37,20 +37,22 @@
         <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
         <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
         <script src="{{ asset('dashboard/assets/js/config.js') }}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
     </head>
 
     <body>
         <!-- Layout wrapper -->
         <div class="layout-wrapper layout-content-navbar">
             <div class="layout-container">
-                @include('sweetalert::alert')
+                {{-- @include('sweetalert::alert') --}}
                 <!-- Menu -->
 
                 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                     <div class="app-brand demo">
                         <a href="/" class="app-brand-link">
                             <span class="app-brand-logo demo">
-                                <img src="{{ asset('images/nasarawa_logo.png') }}" alt="" style="height: 50px">
+                                <img src="{{ asset('images/white.png') }}" alt="" style="height: 50px">
                             </span>
                         </a>
 
@@ -61,11 +63,7 @@
 
                     <div class="menu-inner-shadow"></div>
 
-                    @if (auth()->user()->role->slug == 'client')
-                        @include('partials.client_sidebar')
-                    @else
-                        @include('partials.admin_sidebar')
-                    @endif
+                    @include('partials.admin_sidebar')
                 </aside>
 
                 <!-- Layout container -->
@@ -158,8 +156,6 @@
                                     <script>
                                         document.write(new Date().getFullYear());
                                     </script>
-                                    , Powered by
-                                    Nasarawa State Revenue Service
                                 </div>
                             </div>
                         </footer>
@@ -189,6 +185,9 @@
 
         <!-- Main JS -->
         <script src="{{ asset('dashboard/assets/js/main.js') }}"></script>
+        <script>
+            @include('partials.dashboard._sweetalert')
+        </script>
         @yield('scripts')
     </body>
 </html>

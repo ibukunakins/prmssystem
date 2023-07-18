@@ -13,6 +13,7 @@ class Patient extends Model
         'first_name',
         'last_name',
         'middle_name',
+        'user_id',
         'username',
         'address',
         'phone',
@@ -23,8 +24,9 @@ class Patient extends Model
         'contact_name',
         'contact_phone',
         'marital_status',
-        'department_id'
     ];
+
+    public $appends = ['fullName', 'readableGender', 'readableMarital'];
 
     /**
      * @return string
@@ -55,5 +57,38 @@ class Patient extends Model
         }
 
         return parent::delete($options);
+    }
+
+    function getFullNameAttribute() 
+    {
+        return $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;    
+    }
+    
+    function getReadableGenderAttribute() 
+    {
+        $code = [
+            'm' => 'Male',
+            'o' => 'Others',
+            'f' => 'Female',
+        ];
+
+        return $code[$this->gender];
+    }
+    
+    function getReadableMaritalAttribute() 
+    {
+        $code = [
+            'w' => 'Widowed',
+            's' => 'Single',
+            'm' => 'Married',
+            'd' => 'Divirced',
+        ];
+
+        return $code[$this->marital_status];
+    }
+
+    function user()
+    {
+        return $this->belongsTo(User::class);    
     }
 }

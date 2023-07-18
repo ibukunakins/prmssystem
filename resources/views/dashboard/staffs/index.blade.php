@@ -7,26 +7,51 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
 <div class="mb-2">
-    <h1 class="text-3xl font-bold">All Companies</h1>
+    <h1 class="text-3xl font-bold">All Staff</h1>
     <span class="dashboard__title__line"></span>
 </div>
 
 <div class="row">
     <div class="col-xl-12 mx-auto">        
         <div class="card">
-            <div class="card-body">                
-                <table id="report_datatable" class="table table-bordered table-striped" cellspacing="0"
+            <div class="card-body">    
+                <div class="d-flex card-header justify-content-end">
+                    <input type="text" id="mySearchText" placeholder="">
+                </div>               
+                <table id="table__data" class="table table-bordered table-striped" cellspacing="0"
                 width="100%">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Customer</th>
-                        <th>Phone No</th>
-                        <th>Address</th>
-                        <th>Number of Staff</th>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Department</th>
+                        <th>Gender</th>
+                        <th>Marital Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
+                <tbody>
+                    @foreach ($staff as $index => $value)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $value->full_name }}</td>
+                            <td>{{ $value->title }}</td>
+                            <td>{{ $value->department ? $value->department->name : 'N/A'}}</td>
+                            <td>{{ $value->readableGender }}</td>
+                            <td>{{ $value->readableMarital }}</td>
+                            <td class="d-flex">
+                                <form id="submitApprovalForm" action="{{ route('accounts.staff.destroy') }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input id="hiddenInput" type="hidden" name="id">
+                                </form>
+                                <a href="{{ route('accounts.staff.edit', $value->id) }}" class="btn btn-sm btn-info mr-2">Edit</a>
+                                <button data-id="{{ $value->id }}" class="btn btn-danger btn-sm deleteBtn">Delete</button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
             </table>
             </div>
         </div>
@@ -38,57 +63,33 @@
     @include('partials.dashboard.datatable_scripts')
 
     <script>
-        $(document).ready(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('#report_datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            'pageLength': 20,
-            ajax: {
-                'url': "{{url('dashboard/clients/indexApi')}}",
-            },
-            'columns': [{
-                    data: 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'phone',
-                    name: 'phone'
-                },
-                
-                {
-                    data: 'address',
-                    name: 'address'
-                },
-                {
-                    data: 'staffs',
-                    name: 'staffs'
-                },
-                {
-                    data: 'action',
-                    name: 'action'
-                },
-
-            ],
-            order: [
-                [0, 'desc']
-            ],
+        
+        $('.deleteBtn').on('click', (e) => {            
+            const id = $(e.target).attr('data-id')
+            console.log(id);
+            $('#hiddenInput').val(id)
             
-        });
-    });
-
-    $('#btnFilterSearch').click(function () {
-        $('#report_datatable').DataTable().draw(true);
-    });
+            swal({
+                title: 'Are you sure?',                
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true,
+                
+            }).then((result) => {
+                if (result) {
+                    $('#submitApprovalForm').submit()
+                } else {
+                    swal({
+                        title: 'Cancelled'
+                    })
+                }
+            })
+            .catch(error => {
+                swal({
+                    title: 'Cancelled'
+                })
+            })
+        })
     </script>
 @endsection

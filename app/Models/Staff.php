@@ -10,17 +10,22 @@ class Staff extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'middle_name',
         'title',
-        'username',
         'address',
+        'post_code',
+        'city',
         'phone',
         'email',
         'gender',
         'dob',
         'marital_status',
-        'department_id'
+        'department_id',
+        'user_id'
     ];
+    public $appends = ['fullName', 'readableGender', 'readableMarital'];
 
     /**
      * @return string
@@ -55,5 +60,38 @@ class Staff extends Model
         }
 
         return parent::delete($options);
+    }
+
+    public function user() 
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    function getFullNameAttribute() 
+    {
+        return $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;    
+    }
+    
+    function getReadableGenderAttribute() 
+    {
+        $code = [
+            'm' => 'Male',
+            'o' => 'Others',
+            'f' => 'Female',
+        ];
+
+        return $code[$this->gender];
+    }
+    
+    function getReadableMaritalAttribute() 
+    {
+        $code = [
+            'w' => 'Widowed',
+            's' => 'Single',
+            'm' => 'Married',
+            'd' => 'Divirced',
+        ];
+
+        return $code[$this->marital_status];
     }
 }

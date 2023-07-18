@@ -7,48 +7,38 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
 <div class="mb-2">
-    <h1 class="text-3xl font-bold">All Staff</h1>
+    <h1 class="text-3xl font-bold">All Departments</h1>
     <span class="dashboard__title__line"></span>
 </div>
 
 <div class="row">
     <div class="col-xl-12 mx-auto">        
         <div class="card">
-            <div class="card-body">
+            <div class="card-body">    
                 <div class="d-flex card-header justify-content-end">
                     <input type="text" id="mySearchText" placeholder="">
-                </div>                   
+                </div>            
                 <table id="table__data" class="table table-bordered table-striped" cellspacing="0"
                 width="100%">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Phone</th>
-                        <th>Gender</th>
-                        <th>Marital Status</th>
-                        <th>Contact Name</th>
-                        <th>Date Registered</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($patients as $index => $value)
+                    @foreach ($departments as $index => $value)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $value->full_name }}</td>
-                            <td>{{ $value->phone }}</td>
-                            <td>{{ $value->readableGender }}</td>
-                            <td>{{ $value->readableMarital }}</td>
-                            <td>{{ $value->contact_name }}</td>
-                            <td>{{ $value->created_at->format('Y-m-d') }}</td>
+                            <td>{{ $value->name }}</td>
                             <td class="d-flex">
-                                <form id="submitApprovalForm" action="{{ route('accounts.patients.destroy') }}" method="post">
+                                <form id="submitApprovalForm" action="{{ route('accounts.departments.destroy') }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <input id="hiddenInput" type="hidden" name="id">
                                 </form>
-                                <a href="{{ route('accounts.patients.edit', $value->id) }}" class="btn btn-sm btn-info mr-2">Edit</a>
+                                <a href="{{ route('accounts.departments.edit', $value->id) }}" class="btn btn-sm btn-info mr-2">Edit</a>
                                 <button data-id="{{ $value->id }}" class="btn btn-danger btn-sm deleteBtn">Delete</button>
                             </td>
                         </tr>

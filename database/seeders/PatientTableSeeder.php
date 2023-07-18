@@ -16,6 +16,7 @@ class PatientTableSeeder extends Seeder
     {
         $patients = User::where('role_id', 1)->get();
         $clients = [];
+        Patient::truncate();
         foreach($patients as $patient){
             $client = [
                 'user_id' => $patient->id,
@@ -31,6 +32,8 @@ class PatientTableSeeder extends Seeder
                 'post_code' => fake()->postcode,
                 'contact_name' => fake()->name,
                 'contact_phone' => fake()->e164PhoneNumber,
+                'created_at' => now(),
+                'updated_at' => now(),
                 'marital_status' => fake()->randomElement(['m', 's', 'd', 'w']),
             ];
             $clients[] = $client;

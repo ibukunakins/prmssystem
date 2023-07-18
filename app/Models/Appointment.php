@@ -14,6 +14,7 @@ class Appointment extends Model
     protected $casts = [
         'date_time' => 'datetime'
     ];
+    public $appends = ['statusCode'];
 
     public function patient(){
         return $this->belongsTo(Patient::class);
@@ -27,4 +28,15 @@ class Appointment extends Model
         return $this->belongsTo(Service::class);
     }
 
+    function getStatusCodeAttribute()
+    {
+        $code = [
+            'cancelled' => 'danger',
+            'scheduled' => 'success',
+            'postponed' => 'info',
+            'absent' => 'warning',
+        ];    
+
+        return $code[$this->status];
+    }
 }
