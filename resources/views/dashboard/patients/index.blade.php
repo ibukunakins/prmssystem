@@ -7,7 +7,7 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
 <div class="mb-2">
-    <h1 class="text-3xl font-bold">All Staff</h1>
+    <h1 class="text-3xl font-bold">All Patients</h1>
     <span class="dashboard__title__line"></span>
 </div>
 

@@ -14,6 +14,16 @@ class Appointment extends Model
     protected $casts = [
         'date_time' => 'datetime'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+        
+        static::creating(function ($model) {
+            $model->status = 'scheduled';
+        });
+    }
+
     public $appends = ['statusCode'];
 
     public function patient(){

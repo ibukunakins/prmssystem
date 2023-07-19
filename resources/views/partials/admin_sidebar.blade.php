@@ -28,6 +28,25 @@
             </li>
         </ul>
     </li>
+    <li class="menu-item {{ Request::segment(2) == 'appointments' ?'active':'' }}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-calendar"></i>
+            <div data-i18n="Layouts">Appointments</div>
+        </a>
+
+        <ul class="menu-sub">
+            <li class="menu-item">
+                <a href="{{ route('accounts.appointments.create') }}" class="menu-link">
+                    <div data-i18n="Without menu">Schedule Appointment</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('accounts.appointments.index') }}" class="menu-link">
+                    <div data-i18n="Without navbar">All Appointments</div>
+                </a>
+            </li>
+        </ul>
+    </li>
     <li class="menu-item  {{ Request::segment(2) == 'staff' ?'active':'' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-user"></i>
