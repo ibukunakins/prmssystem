@@ -6,8 +6,9 @@
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
+    @include('partials._errors')
 <div class="mb-2">
-    <h1 class="text-3xl font-bold">All Appointments</h1>
+    <h1 class="text-3xl font-bold">All Admissions</h1>
     <span class="dashboard__title__line"></span>
 </div>
 
@@ -23,36 +24,38 @@
                     <thead>
                         <tr>
                             <th>S/N</th>
-                            <th>Appointment Title</th>
                             <th>Patient</th>
+                            <th>Admission Type</th>
+                            <th>Admission Time</th>
+                            <th>Ward</th>
+                            <th>Room</th>
                             <th>Staff</th>
-                            <th>Staff Designation</th>
-                            <th>Date</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @foreach ($appointments as $index => $appointment)
+                        @foreach ($admissions as $index => $admission)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $appointment->title }}</td>
-                                <td>{{ $appointment->patient->full_name }}</td>
-                                <td>{{ $appointment->staff->full_name }}</td>
-                                <td>{{ $appointment->staff->title }}</td>
-                                <td>{{ $appointment->date_time }}</td>
-                                <td><span class="badge bg-label-{{ $appointment->statusCode }} me-1">{{ $appointment->status }}</span></td>
+                                <td>{{ $admission->patient->full_name }}</td>
+                                <td>{{ $admission->admission_type }}</td>
+                                <td>{{ $admission->admission_time }}</td>
+                                <td>{{ $admission->ward_no }}</td>
+                                <td>{{ $admission->room_no }}</td>
+                                <td>{{ $admission->staff->full_name }}</td>
+                                <td><span class="badge bg-label-{{ $admission->statusCode }} me-1">{{ $admission->status }}</span></td>
                                 <td class="d-flex">
-                                    <form id="submitApprovalForm" action="{{ route('accounts.appointments.destroy') }}" method="post">
+                                    <form id="submitApprovalForm" action="{{ route('accounts.admissions.destroy') }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <input id="hiddenInput" type="hidden" name="id">
                                     </form>
-                                    <a href="{{ route('accounts.appointments.show', $appointment->id) }}" class="btn btn-dark btn-sm mr-2">View</a>
-                                    @if ($appointment->status != 'cancelled')
-                                    <a href="{{ route('accounts.appointments.edit', $appointment->id) }}" class="btn btn-info btn-sm mr-2">Edit</a>
+                                    <a href="{{ route('accounts.admissions.show', $admission->id) }}" class="btn btn-dark btn-sm mr-2">View</a>
+                                    @if ($admission->status != 'cancelled')
+                                    <a href="{{ route('accounts.admissions.edit', $admission->id) }}" class="btn btn-info btn-sm mr-2">Edit</a>
                                     @endif
-                                    <button data-id="{{ $appointment->id }}" class="btn btn-danger btn-sm deleteBtn">Delete</button>
+                                    <button data-id="{{ $admission->id }}" class="btn btn-danger btn-sm deleteBtn">Delete</button>
                                 </td>
                             </tr>
                         @endforeach

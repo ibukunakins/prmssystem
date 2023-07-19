@@ -16,9 +16,15 @@ class Admission extends Model
         'ward_no',
         'room_no',
         'comment',
-        'staff_id'
+        'staff_id',
+        'status'
+    ];
+    
+    protected $casts = [
+        'admission_time' => 'datetime'
     ];
 
+    public $appends = ['statusCode'];
     /**
      * @return string
      */
@@ -33,6 +39,16 @@ class Admission extends Model
 
     public function staff(){
         return $this->belongsTo(Staff::class);
+    }
+
+    function getStatusCodeAttribute()
+    {
+        $code = [
+            'discharged' => 'danger',
+            'admitted' => 'success',
+        ];    
+
+        return $code[$this->status];
     }
 
 }

@@ -19,4 +19,9 @@ class DashboardController extends Controller
 
         return view('dashboard.index', compact('patients', 'admissions', 'staff', 'appointments'));
     }
+    
+    public function changePassword()
+    {
+        return view('dashboard.password');   
+    }
 }

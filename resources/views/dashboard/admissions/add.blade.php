@@ -23,18 +23,17 @@
 <section class="col-lg-7 w-full mx-auto">
     <div class="card" >
         <div class="card-header bg-white text-center">
-            <h4 class="mb-0 text-lg font-bold">Update Appointment</h4>
+            <h4 class="mb-0 text-lg font-bold">Admit New Patient</h4>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('accounts.appointments.update', $appointment->id) }}">
+            <form method="POST" action="{{ route('accounts.admissions.store') }}">
                 @csrf
-                @method('PUT')
                 <div class="form__group">
                     <label for="patient_id">Patient<span class="text-danger">*</span></label>
                     <select name="patient_id" class="select2 form__control" id="">
                         <option value="">Choose patient</option>
                         @foreach ($patients as $patient)
-                            <option {{ old('patient_id') == $patient->id || $appointment->patient_id == $patient->id ? 'selected' :'' }} value="{{ $patient->id }}">{{ $patient->full_name }}</option>
+                            <option {{ old('patient_id') == $patient->id ? 'selected' :'' }} value="{{ $patient->id }}">{{ $patient->full_name }}</option>
                         @endforeach
                     </select>
                     @error('patient_id')
@@ -42,53 +41,42 @@
                     @enderror
                 </div>
                 <div class="form__group">
-                    <label for="staff_id">Staff<span class="text-danger">*</span></label>
-                    <select name="staff_id" class="select2 form__control" id="staff_id">
-                        <option value="">Choose staff</option>
-                        @foreach ($staff as $value)
-                            <option {{ old('staff_id') == $value->id || $appointment->staff_id == $value->id ? 'selected' :'' }} value="{{ $value->id }}">{{ $value->full_name }}</option>
-                        @endforeach
+                    <label for="admission_type">Admission Type<span class="text-danger">*</span></label>
+                    <select name="admission_type" class="select2 form__control" id="admission_type">
+                        <option value="">Choose option</option>
+                        <option value="Accident">Accident</option>
+                        <option value="Labour">Labour Room</option>
+                        <option value="Emergency">Emergency</option>
+                        <option value="Surgery">Surgery</option>
                     </select>
-                    @error('staff_id')
-                        <span class="text-danger text-sm">{{ $message }}</span>
-                    @enderror
-                </div> 
-                <div class="form__group">
-                    <label for="service_id">Service<span class="text-danger">*</span></label>
-                    <select name="service_id" class="select2 form__control" id="service_id">
-                        <option value="">Choose service</option>
-                        @foreach ($services as $value)
-                            <option {{ old('service_id') == $value->id || $appointment->service_id == $value->id ? 'selected' :'' }} value="{{ $value->id }}">{{ $value->title }}</option>
-                        @endforeach
-                    </select>
-                    @error('service_id')
-                        <span class="text-danger text-sm">{{ $message }}</span>
-                    @enderror
-                </div> 
-                <div class="form__group">
-                    <label for="date_time">Choose Date & Time<span class="text-danger">*</span></label>
-                    <input id="datetimepicker" value="{{ old('date_time') ?? $appointment->date_time }}" name="date_time" required type="text" id="date_time" class="form__control" placeholder="Enter preferred date">
-                    @error('date_time')
+                    @error('admission_type')
                         <span class="text-danger text-sm">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form__group">
-                    <label for="title">Appointment Title<span class="text-danger">*</span></label>
-                    <input type="text" class="form__control" name="title" required placeholder="Enter title" value="{{ old('title') ?? $appointment->title }}">
-                    @error('title')
+                    <label for="room_no">Room Number<span class="text-danger">*</span></label>
+                    <input value="{{ old('room_no') }}" name="room_no" required type="text" id="room_no" class="form__control" placeholder="Enter room number">
+                    @error('room_no')
                         <span class="text-danger text-sm">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form__group">
-                    <label for="comment">Appointment Description</label>
-                    <textarea name="comment" rows="4" id="comment" class="form__control" placeholder="Enter comment">{{ old('comment') ?? $appointment->comment }}</textarea>
+                    <label for="ward_no">Ward Number<span class="text-danger">*</span></label>
+                    <input value="{{ old('ward_no') }}" name="ward_no" required type="text" id="ward_no" class="form__control" placeholder="Enter ward number">
+                    @error('ward_no')
+                        <span class="text-danger text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form__group">
+                    <label for="comment">Appointment Comment</label>
+                    <textarea name="comment" rows="4" id="comment" class="form__control" placeholder="Enter comment">{{ old('comment') }}</textarea>
                     @error('comment')
                         <span class="text-danger text-sm">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="mt-2">
                     <button type="submit" class="btn btn-success text-white btn-block">
-                        Update Appointment
+                        Submit Record
                     </button>
                 </div>
             </form>

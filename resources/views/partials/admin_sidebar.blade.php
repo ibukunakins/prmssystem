@@ -3,11 +3,30 @@
 @endphp
 <ul class="menu-inner py-1">
     <!-- Dashboard -->
-    <li class="menu-item {{ Request::segment(2) == '' ?'active':'' }}">
+    <li class="menu-item {{ Request::segment(1) == 'account' && Request::segment(2) == '' ?'active':'' }}">
         <a href="{{ route('accounts.index') }}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
         </a>
+    </li>
+    <li class="menu-item {{ Request::segment(2) == 'admissions' ?'active':'' }}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-health"></i>
+            <div data-i18n="Layouts">Admissions</div>
+        </a>
+
+        <ul class="menu-sub">
+            <li class="menu-item">
+                <a href="{{ route('accounts.admissions.create') }}" class="menu-link">
+                    <div data-i18n="Without menu">Admit Patient</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('accounts.admissions.index') }}" class="menu-link">
+                    <div data-i18n="Without navbar">All Admissions</div>
+                </a>
+            </li>
+        </ul>
     </li>
     <li class="menu-item {{ Request::segment(2) == 'patients' ?'active':'' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -108,6 +127,12 @@
         <a href="{{ route('profile.edit') }}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-user"></i>
             <div data-i18n="Analytics">Update Profile</div>
+        </a>
+    </li>
+    <li class="menu-item {{ Request::segment(1) == 'change-password' ?'active':'' }}">
+        <a href="{{ route('change.password') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-key"></i>
+            <div data-i18n="Analytics">Change Password</div>
         </a>
     </li>
 </ul>

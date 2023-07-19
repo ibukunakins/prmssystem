@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>{{ $title }} </title>
+    <title>no </title>
     <!-- Meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,7 +26,7 @@
     <div class="wTayouts-two-grids">
         <div class="mid-class">
             <div class="txt-left-side">
-                <h2> {{ $title }} </h2>
+                <h2> Update </h2>
                 @yield('content')
             </div>
         </div>

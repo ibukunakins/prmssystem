@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/change-password', [DashboardController::class, 'changePassword'])->name('change.password');
 
     Route::middleware(['staff', 'verified'])->prefix('account')->name('accounts.')->group(function(){
 
@@ -52,18 +53,22 @@ Route::middleware('auth')->group(function () {
         Route::group(['prefix' => 'appointments', 'as' => 'appointments.'], function(){
             Route::get('/', [AppointmentController::class, 'index'])->name('index');
             Route::get('/create', [AppointmentController::class, 'create'])->name('create');
+            Route::post('/cancel', [AppointmentController::class, 'cancel'])->name('cancel');
             Route::post('/', [AppointmentController::class, 'store'])->name('store');
             Route::get('/edit/{id}', [AppointmentController::class, 'edit'])->name('edit');
             Route::put('/update/{id}', [AppointmentController::class, 'update'])->name('update');
-            Route::delete('/{id}', [AppointmentController::class, 'destroy'])->name('destroy');
+            Route::get('/{id}', [AppointmentController::class, 'show'])->name('show');
+            Route::delete('/', [AppointmentController::class, 'destroy'])->name('destroy');
         });
 
         Route::group(['prefix' => 'admissions', 'as' => 'admissions.'], function(){
             Route::get('/', [AdmissionController::class, 'index'])->name('index');
             Route::get('/create', [AdmissionController::class, 'create'])->name('create');
+            Route::post('/discharged', [AdmissionController::class, 'discharged'])->name('discharged');
             Route::post('/', [AdmissionController::class, 'store'])->name('store');
             Route::get('/edit/{id}', [AdmissionController::class, 'edit'])->name('edit');
             Route::put('/update/{id}', [AdmissionController::class, 'update'])->name('update');
+            Route::get('/{id}', [AdmissionController::class, 'show'])->name('show');
             Route::delete('/', [AdmissionController::class, 'destroy'])->name('destroy');
         });
 

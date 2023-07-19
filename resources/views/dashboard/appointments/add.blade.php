@@ -79,9 +79,9 @@
                     @enderror
                 </div>
                 <div class="form__group">
-                    <label for="description">Appointment Description</label>
-                    <textarea name="description" rows="4" id="description" class="form__control" placeholder="Enter description">{{ old('description') }}</textarea>
-                    @error('description')
+                    <label for="comment">Appointment Description</label>
+                    <textarea name="comment" rows="4" id="comment" class="form__control" placeholder="Enter comment">{{ old('comment') }}</textarea>
+                    @error('comment')
                         <span class="text-danger text-sm">{{ $message }}</span>
                     @enderror
                 </div>
