@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admission;
+use App\Models\Appointment;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 
@@ -9,14 +11,22 @@ class PatientController extends Controller
 {
     function index()
     {
-        $patients = Patient::orderBy('first_name')->get(); 
-        
+        $patients = Patient::orderBy('first_name')->get();
+
         return view('dashboard.patients.index', compact('patients'));
     }
 
     function create()
     {
         return view('dashboard.patients.add');
+    }
+
+    function show($id){
+        $patient = Patient::findOrFail($id);
+        $appointments = Appointment::where('patient_id', $patient->id)->get();
+        $admissions = Admission::where('patient_id', $patient->id)->get();
+
+        return view('dashboard.patients.show', compact('patient', 'admissions', 'appointments'));
     }
 
     function store(Request $request)
@@ -46,7 +56,7 @@ class PatientController extends Controller
     function edit($id)
     {
         $patient = Patient::find($id);
-        
+
         return view('dashboard.patients.edit', compact('patient'));
     }
 

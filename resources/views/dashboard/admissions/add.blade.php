@@ -54,19 +54,33 @@
                     @enderror
                 </div>
                 <div class="form__group">
+                    <label for="ward_no">Ward Number<span class="text-danger">*</span></label>
+                    <select name="ward_no" id="ward_no" class="form__control">
+                        <option value="">Select Ward</option>
+                        <option value="MSG001">MSG001</option>
+                        <option value="FSG002">FSG002</option>
+                        <option value="FDL010">FDL010</option>
+                        <option value="RTL003">RDL003</option>
+                    </select>
+                    @error('ward_no')
+                    <span class="text-danger text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form__group">
                     <label for="room_no">Room Number<span class="text-danger">*</span></label>
-                    <input value="{{ old('room_no') }}" name="room_no" required type="text" id="room_no" class="form__control" placeholder="Enter room number">
+                    <select name="room_no" id="room_no" class="form__control">
+                        <option value="">Select Room Number</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                     @error('room_no')
                         <span class="text-danger text-sm">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="form__group">
-                    <label for="ward_no">Ward Number<span class="text-danger">*</span></label>
-                    <input value="{{ old('ward_no') }}" name="ward_no" required type="text" id="ward_no" class="form__control" placeholder="Enter ward number">
-                    @error('ward_no')
-                        <span class="text-danger text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
+
                 <div class="form__group">
                     <label for="comment">Appointment Comment</label>
                     <textarea name="comment" rows="4" id="comment" class="form__control" placeholder="Enter comment">{{ old('comment') }}</textarea>

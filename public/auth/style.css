@@ -317,8 +317,8 @@ body {
 .mid-class{
 /* display: -webkit-flex; */
  /* display: flex;  */
- -webkit-justify-content: space-between; 
-justify-content: space-between; 
+ -webkit-justify-content: space-between;
+justify-content: space-between;
 -webkit-flex-wrap: wrap;
 flex-wrap:wrap;
 }
@@ -374,7 +374,7 @@ h1.error {
     width: 100%;
     color: #fff;
     font-size: 14px;
-    border: none; 
+    border: none;
     outline: none;
 	padding: .6em .6em;
     -webkit-appearance: none;
@@ -411,6 +411,7 @@ button[type=submit] {
     text-transform: uppercase;
     cursor: pointer;
     width: 100%;
+    padding: 1em;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -o-transition: 0.5s all;
@@ -451,7 +452,7 @@ float:left;
     color: #fff;
     text-transform: uppercase;
 }
-.left-side-forget,.right-side-forget{ 
+.left-side-forget,.right-side-forget{
  flex-basis: 50%;
     -webkit-flex-basis: 50%;
     box-sizing: border-box;}
@@ -527,7 +528,7 @@ h1.error {
     margin-bottom: 43px;
     letter-spacing: 3px;
     font-size: 49px;
-}	
+}
 .img-right-side, .txt-left-side {
     padding: 3.5em 4em 3em;
 }
@@ -559,7 +560,7 @@ h1.error {
     padding-top: 51px;
     margin-bottom: 40px;
     font-size: 46px;
-}	
+}
 .wTayouts-two-grids {
     width: 66%;
 	}
@@ -582,7 +583,7 @@ h1.error {
 }
 button[type=submit] {
     margin: 39px 0px 18px;
-}	
+}
 }
 @media(max-width:1280px){
 h1.error {
@@ -592,7 +593,7 @@ h1.error {
 }
 .wTayouts_more-buttn h3 {
     margin-top: 40px;
-}	
+}
 .copyrigh-wthree {
     padding: 2.7em 0em 4.2em;
 }
@@ -604,13 +605,13 @@ h1.error {
 .img-right-side h3, .txt-left-side h2 {
     font-size: 21px;
     margin-bottom: 24px;
-}	
+}
 }
 @media(max-width:1050px){
 h1.error {
     font-size: 41px;
     letter-spacing: 2px;
-}	
+}
 .form-left-to-wT {
     margin: 0px 0px 22px;
 }
@@ -625,7 +626,7 @@ h1.error {
     margin-bottom: 34px;
 }
 .form-left-to-wT input[type="email"], .form-left-to-wT input[type="password"] {
-    padding: .5em .6em;	
+    padding: .5em .6em;
 	}
 .form-left-to-wT span {
     line-height: 33px;
@@ -698,7 +699,7 @@ button[type=submit] {
 }
 .copyrigh-wthree {
     padding: 2.1em 0em 3.5em;
-}	
+}
 }
 @media(max-width:736px){
 .wTayouts-two-grids {
@@ -706,7 +707,7 @@ button[type=submit] {
 }
 .wTayouts_more-buttn h3 {
     font-size: 14px;
-}	
+}
 }
 @media(max-width:667px){
 .img-right-side, .txt-left-side {
@@ -717,7 +718,7 @@ button[type=submit] {
 }
 h1.error {
     font-size: 33px;
-}	
+}
 }
 @media(max-width:640px){
 .img-right-side, .txt-left-side {
@@ -737,7 +738,7 @@ h1.error {
 }
 .wTayouts_more-buttn h3 {
     margin-top: 29px;
-}	
+}
 }
 @media(max-width:568px){
 .img-right-side h3, .txt-left-side h2 {
@@ -746,7 +747,7 @@ h1.error {
 }
 .wTayouts-two-grids {
     width: 78%;
-}	
+}
 }
 @media(max-width:480px){
 .img-right-side, .txt-left-side {
@@ -775,7 +776,7 @@ h1.error {
 }
 .copyrigh-wthree p {
     line-height: 29px;
-}	
+}
 }
 @media(max-width:414px){
 .img-right-side p, .txt-left-side p {
@@ -793,7 +794,7 @@ h1.error {
 @media(max-width:384px){
 h1.error {
     font-size: 29px;
-}	
+}
 .img-right-side, .txt-left-side {
     padding: 2em 2em 2em;
 }
@@ -826,6 +827,6 @@ h1.error {
 .wTayouts_more-buttn a {
     font-size: 13px;
     line-height: 27px;
-}	
+}
 }
 /*--//responsive--*/

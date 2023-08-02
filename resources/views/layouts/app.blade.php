@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>no </title>
+    <title>{{ $title }}</title>
     <!-- Meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -19,19 +19,19 @@
 
 <body>
     <h1 class="error">
-        <a class="navbar-brand" href="/">
-            <img src="{{ asset('images/black.png') }}" alt="" style="height: 90px">    
-        </a>    
+        <a class="navbar-brand" href="/" style="color: #ff9900">
+            EMR Prototype
+        </a>
     </h1>
     <div class="wTayouts-two-grids">
         <div class="mid-class">
             <div class="txt-left-side">
-                <h2> Update </h2>
+                <h2> {{ $title }}</h2>
                 @yield('content')
             </div>
         </div>
     </div>
-    
+
     <footer class="copyrigh-wthree">
         <p>
             © {{ date('Y') }}

@@ -23,14 +23,14 @@
                     @error('description')
                         <span class="text-danger text-sm">{{ $message }}</span>
                     @enderror
-                </div> 
+                </div>
                 <div class="form__group">
-                    <label for="duration">Duration (weeks)<span class="text-danger">*</span></label>
+                    <label for="duration">Duration (mins)<span class="text-danger">*</span></label>
                     <input value="{{ old('duration') }}" name="duration" required type="number" id="duration" class="form__control" placeholder="Enter duration">
                     @error('duration')
                         <span class="text-danger text-sm">{{ $message }}</span>
                     @enderror
-                </div> 
+                </div>
                 <div class="form__group">
                     <label for="department_id">Department<span class="text-danger">*</span></label>
                     <select name="department_id" id="" class="form__control">
@@ -42,7 +42,7 @@
                     @error('duration')
                         <span class="text-danger text-sm">{{ $message }}</span>
                     @enderror
-                </div> 
+                </div>
                 <div class="mt-2">
                     <button type="submit" class="btn btn-success text-white btn-block">
                         Add Service
@@ -58,7 +58,7 @@
 @section('scripts')
     <script>
         $(document).ready(() => {
-            
+
         })
     </script>
 @endsection

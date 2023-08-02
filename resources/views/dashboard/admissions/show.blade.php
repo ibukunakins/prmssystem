@@ -46,8 +46,14 @@
                     </tr>
                     <tr>
                         <td>Status</td>
-                        <td><span class="text-{{ $admission->status_code }}">{{ $admission->status }}</span></td>
+                        <td><span class="text-{{ $admission->status_code }}">{{ ucfirst($admission->status) }}</span></td>
                     </tr>
+                    @if($admission->status == 'discharged')
+                    <tr>
+                        <td>Date discharged</td>
+                        <td> {{ $admission->updated_at->toFormattedDateString() }}</td>
+                    </tr>
+                    @endif
                 </table>
                 @if ($admission->status != 'discharged')
                     <div class="card-body">
@@ -57,7 +63,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 @endsection
 
@@ -66,12 +72,12 @@
         $(document).ready(() => {
             $('.cancelBtn').on('click', (e) => {
                 swal({
-                    title: 'Are you sure?',                
+                    title: 'Are you sure?',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete',
+                    confirmButtonText: 'Yes, confirm',
                     cancelButtonText: 'No, cancel!',
                     reverseButtons: true,
-                    
+
                 }).then((result) => {
                     if (result) {
                         $('#submitApprovalForm').submit()

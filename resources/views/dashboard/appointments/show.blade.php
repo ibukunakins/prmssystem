@@ -10,6 +10,7 @@
         </form>
         @if ($appointment->status != 'cancelled')
             <button class="btn btn-danger cancelBtn">Cancel Appointment</button>
+            <button class="btn btn-success confirmBtn">Confirm Appointment</button>
         @endif
     </div>
     <div class="row">
@@ -46,7 +47,7 @@
                     </tr>
                     <tr>
                         <td>Status</td>
-                        <td><span class="text-{{ $appointment->status_code }}">{{ $appointment->status }}</span></td>
+                        <td><span class="text-{{ $appointment->status_code }}">{{ ucfirst($appointment->status) }}</span></td>
                     </tr>
                 </table>
                 @if ($appointment->status != 'cancelled')
@@ -57,7 +58,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 @endsection
 
@@ -66,12 +67,12 @@
         $(document).ready(() => {
             $('.cancelBtn').on('click', (e) => {
                 swal({
-                    title: 'Are you sure?',                
+                    title: 'Cancel this appointment',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete',
+                    confirmButtonText: 'Yes, confirm',
                     cancelButtonText: 'No, cancel!',
                     reverseButtons: true,
-                    
+
                 }).then((result) => {
                     if (result) {
                         $('#submitApprovalForm').submit()
@@ -86,6 +87,29 @@
                         title: 'Cancelled'
                     })
                 })
+            })
+            $('.confirmBtn').on('click', (e) => {
+                swal({
+                    title: 'Confirm Appointment. Only confirm appointment when patient is sighted.',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, confirm',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true,
+
+                }).then((result) => {
+                    if (result) {
+                        $('#submitApprovalForm').submit()
+                    } else {
+                        swal({
+                            title: 'Cancelled'
+                        })
+                    }
+                })
+                    .catch(error => {
+                        swal({
+                            title: 'Cancelled'
+                        })
+                    })
             })
         })
     </script>

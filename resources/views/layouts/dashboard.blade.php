@@ -52,7 +52,7 @@
                     <div class="app-brand demo">
                         <a href="/" class="app-brand-link">
                             <span class="app-brand-logo demo">
-                                <img src="{{ asset('images/white.png') }}" alt="" style="height: 50px">
+                                <img src="{{ asset('images/logo-white.png') }}" alt="" style="height: 50px">
                             </span>
                         </a>
 
@@ -106,7 +106,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <span class="fw-semibold d-block">John Doe</span>
+                                                        <span class="fw-semibold d-block">{{ auth()->user()->email }}</span>
                                                         <small class="text-muted">Admin</small>
                                                     </div>
                                                 </div>
@@ -116,7 +116,7 @@
                                             <div class="dropdown-divider"></div>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{{ route('profile.edit') }}">
                                                 <i class="bx bx-user me-2"></i>
                                                 <span class="align-middle">My Profile</span>
                                             </a>
@@ -131,10 +131,13 @@
                                             <div class="dropdown-divider"></div>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('logout') }}">
+                                            <a class="dropdown-item" href="#" id="logOut" onclick="logOut()" >
                                                 <i class="bx bx-power-off me-2"></i>
                                                 <span class="align-middle">Log Out</span>
                                             </a>
+                                            <form id="logoutForm" action="{{ route('logout') }}" method="post">
+                                                @csrf
+                                            </form>
                                         </li>
                                     </ul>
                                 </li>
@@ -189,5 +192,14 @@
             @include('partials.dashboard._sweetalert')
         </script>
         @yield('scripts')
+    <script>
+        function logOut(){
+            if(confirm('Are you sure you want to log out now?')){
+                let form = document.getElementById('logoutForm');
+                form.submit()
+            }
+        }
+
+    </script>
     </body>
 </html>

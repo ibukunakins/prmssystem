@@ -9,6 +9,7 @@
             <div data-i18n="Analytics">Dashboard</div>
         </a>
     </li>
+    @if(auth()->user()->role_id == 5)
     <li class="menu-item {{ Request::segment(2) == 'admissions' ?'active':'' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-health"></i>
@@ -66,6 +67,33 @@
             </li>
         </ul>
     </li>
+    @endif
+    <li class="menu-item  {{ Request::segment(2) == 'reports' ?'active':'' }}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-building"></i>
+            <div data-i18n="Layouts">Reports</div>
+        </a>
+
+        <ul class="menu-sub">
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <div data-i18n="Without menu">Patient Report</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <div data-i18n="Without navbar">Service Report</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <div data-i18n="Without navbar">Department Report</div>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+    @if(auth()->user()->role_id == 25)
     <li class="menu-item  {{ Request::segment(2) == 'staff' ?'active':'' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-user"></i>
@@ -123,6 +151,8 @@
             </li>
         </ul>
     </li>
+
+    @endif
     <li class="menu-item {{ Request::segment(2) == 'profile' ?'active':'' }}">
         <a href="{{ route('profile.edit') }}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-user"></i>

@@ -12,12 +12,12 @@
 </div>
 
 <div class="row">
-    <div class="col-xl-12 mx-auto">        
+    <div class="col-xl-12 mx-auto">
         <div class="card">
-            <div class="card-body">    
+            <div class="card-body">
                 <div class="d-flex card-header justify-content-end">
                     <input type="text" id="mySearchText" placeholder="">
-                </div>            
+                </div>
                 <table id="table__data" class="table table-bordered table-striped" cellspacing="0"
                 width="100%">
                 <thead>
@@ -25,7 +25,7 @@
                         <th>No</th>
                         <th>Title</th>
                         <th>Description</th>
-                        <th>Duration (weeks)</th>
+                        <th>Duration</th>
                         <th>Department</th>
                         <th>Action</th>
                     </tr>
@@ -35,7 +35,7 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $value->title }}</td>
-                            <td>{{ $value->description }}</td>
+                            <td>{{ $value->description }} min(s)</td>
                             <td>{{ $value->duration }}</td>
                             <td>{{ $value->department ? $value->department->name : 'N/A' }}</td>
                             <td class="d-flex">
@@ -61,18 +61,18 @@
     @include('partials.dashboard.datatable_scripts')
 
     <script>
-        
-        $('.deleteBtn').on('click', (e) => {            
+
+        $('.deleteBtn').on('click', (e) => {
             const id = $(e.target).attr('data-id')
             $('#hiddenInput').val(id)
-            
+
             swal({
-                title: 'Are you sure?',                
+                title: 'Are you sure?',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, delete',
                 cancelButtonText: 'No, cancel!',
                 reverseButtons: true,
-                
+
             }).then((result) => {
                 if (result) {
                     $('#submitApprovalForm').submit()

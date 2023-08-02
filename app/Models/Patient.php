@@ -59,12 +59,12 @@ class Patient extends Model
         return parent::delete($options);
     }
 
-    function getFullNameAttribute() 
+    function getFullNameAttribute()
     {
-        return $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;    
+        return $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
     }
-    
-    function getReadableGenderAttribute() 
+
+    function getReadableGenderAttribute()
     {
         $code = [
             'm' => 'Male',
@@ -74,14 +74,14 @@ class Patient extends Model
 
         return $code[$this->gender];
     }
-    
-    function getReadableMaritalAttribute() 
+
+    function getReadableMaritalAttribute()
     {
         $code = [
             'w' => 'Widowed',
             's' => 'Single',
             'm' => 'Married',
-            'd' => 'Divirced',
+            'd' => 'Divorced',
         ];
 
         return $code[$this->marital_status];
@@ -89,6 +89,6 @@ class Patient extends Model
 
     function user()
     {
-        return $this->belongsTo(User::class);    
+        return $this->belongsTo(User::class);
     }
 }

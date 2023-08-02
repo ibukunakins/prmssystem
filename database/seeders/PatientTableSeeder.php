@@ -16,7 +16,7 @@ class PatientTableSeeder extends Seeder
     {
         $patients = User::where('role_id', 1)->get();
         $clients = [];
-        Patient::truncate();
+//        Patient::truncate();
         foreach($patients as $patient){
             $client = [
                 'user_id' => $patient->id,

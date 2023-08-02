@@ -12,12 +12,12 @@
 </div>
 
 <div class="row">
-    <div class="col-xl-12 mx-auto">        
+    <div class="col-xl-12 mx-auto">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex card-header justify-content-end">
                     <input type="text" id="mySearchText" placeholder="">
-                </div>                   
+                </div>
                 <table id="table__data" class="table table-bordered table-striped" cellspacing="0"
                 width="100%">
                 <thead>
@@ -43,13 +43,9 @@
                             <td>{{ $value->contact_name }}</td>
                             <td>{{ $value->created_at->format('Y-m-d') }}</td>
                             <td class="d-flex">
-                                <form id="submitApprovalForm" action="{{ route('accounts.patients.destroy') }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input id="hiddenInput" type="hidden" name="id">
-                                </form>
+                                <a href="{{ route('accounts.patients.show', $value->id) }}" class="btn btn-sm btn-dark mr-2">View</a>
                                 <a href="{{ route('accounts.patients.edit', $value->id) }}" class="btn btn-sm btn-info mr-2">Edit</a>
-                                <button data-id="{{ $value->id }}" class="btn btn-danger btn-sm deleteBtn">Delete</button>
+
                             </td>
                         </tr>
                     @endforeach
@@ -65,19 +61,19 @@
     @include('partials.dashboard.datatable_scripts')
 
     <script>
-        
-        $('.deleteBtn').on('click', (e) => {            
+
+        $('.deleteBtn').on('click', (e) => {
             const id = $(e.target).attr('data-id')
             console.log(id);
             $('#hiddenInput').val(id)
-            
+
             swal({
-                title: 'Are you sure?',                
+                title: 'Are you sure?',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, delete',
                 cancelButtonText: 'No, cancel!',
                 reverseButtons: true,
-                
+
             }).then((result) => {
                 if (result) {
                     $('#submitApprovalForm').submit()

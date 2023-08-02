@@ -28,7 +28,7 @@ Route::get('/', function () {
         return redirect('dashboard');
     } else {
         return redirect('login');
-        
+
     }
 });
 
@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [PatientController::class, 'index'])->name('index');
             Route::get('/create', [PatientController::class, 'create'])->name('create');
             Route::post('/', [PatientController::class, 'store'])->name('store');
+            Route::get('/show/{id}', [PatientController::class, 'show'])->name('show');
             Route::get('/edit/{id}', [PatientController::class, 'edit'])->name('edit');
             Route::put('/update/{id}', [PatientController::class, 'update'])->name('update');
             Route::delete('/', [PatientController::class, 'destroy'])->name('destroy');
@@ -75,7 +76,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware(['verified', 'admin'])->prefix('account')->name('accounts.')->group(function (){
-        
+
         Route::group(['prefix' => 'staff', 'as' => 'staff.'], function (){
             Route::get('/', [StaffController::class, 'index'])->name('index');
             Route::get('/create', [StaffController::class, 'create'])->name('create');
